@@ -171,25 +171,25 @@
         <div class="row">
           <div class="col-md-6 col-lg-3" data-aos="zoom-in">
             <div style="text-align: center;">
-              <h1>1000</h4>
+              <h1 id="total_signup">1000</h4>
               <p class="description">TOTAL SIGN UP</p>
             </div>
           </div>
           <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
             <div style="text-align: center;">
-              <h1>1000</h4>
+              <h1 id="total_payin">1000</h4>
               <p class="description">TOTAL PAYIN</p>
             </div>
           </div>
           <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
             <div style="text-align: center;">
-              <h1>1000</h4>
+              <h1 id="total_payout">1000</h4>
               <p class="description">TOTAL PAYOUT</p>
             </div>
           </div>
           <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
             <div style="text-align: center;">
-              <h1>1000</h4>
+              <h1 id="total_leaders">1000</h4>
               <p class="description">TOTAL LEADERS</p>
             </div>
           </div>
@@ -934,7 +934,19 @@
   <script src="assets/js/main.js"></script>
 
   <script>
-
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          let result = JSON.parse(xhttp.responseText).reference_data[0];
+          console.log('result', result)
+          document.getElementById("total_signup").innerHTML = (result.total_signup).toLocaleString();
+          document.getElementById("total_payin").innerHTML = (result.total_payin).toLocaleString();
+          document.getElementById("total_payout").innerHTML = (result.total_payout).toLocaleString();
+          document.getElementById("total_leaders").innerHTML = (result.total_leaders).toLocaleString();
+        }
+    };
+    xhttp.open("GET", "http://kingofspades.online/api/landing-total", true);
+    xhttp.send();
 
   </script>
 
